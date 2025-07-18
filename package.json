@@ -1,15 +1,17 @@
 {
-  "name": "render-express-deployment",
+  "name": "liderchat-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "LiderChat server deployed on Render",
   "main": "server.js",
-"scripts": {
-  "start": "node server.js"
-},
-  "keywords": [],
-  "author": "",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Your Name",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

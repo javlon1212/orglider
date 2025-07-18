@@ -5,7 +5,7 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// 📁 Statik fayllarni o‘qish (public papkasi ichidan)
+// 📁 Static fayllar uchun liderchat2 papkasini o‘qish
 app.use(express.static(path.join(__dirname, "liderchat2")));
 app.use(express.json());
 
@@ -14,24 +14,24 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "liderchat2", "login.html"));
 });
 
-// 📦 USERS MA'LUMOTLARI
+// 🔁 Foydalanuvchi fayli
 const usersFile = path.join(__dirname, "users.json");
 
-// 1. Barcha foydalanuvchilarni olish
+// 🔸 1. Barcha foydalanuvchilarni olish
 app.get("/users", (req, res) => {
   if (!fs.existsSync(usersFile)) return res.json({ users: [] });
   const data = fs.readFileSync(usersFile);
   res.json(JSON.parse(data));
 });
 
-// 2. Foydalanuvchilarni saqlash
+// 🔸 2. Saqlash
 app.post("/data", (req, res) => {
   const { users } = req.body;
   fs.writeFileSync(usersFile, JSON.stringify({ users }));
   res.json({ status: "ok" });
 });
 
-// 3. Foydalanuvchini o‘chirish
+// 🔸 3. O‘chirish
 app.post("/delete-user", (req, res) => {
   const { login } = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -40,7 +40,7 @@ app.post("/delete-user", (req, res) => {
   res.sendStatus(200);
 });
 
-// 4. Foydalanuvchini bloklash
+// 🔸 4. Bloklash
 app.post("/block-user", (req, res) => {
   const { login, blockedUntil } = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -54,7 +54,7 @@ app.post("/block-user", (req, res) => {
   }
 });
 
-// 5. Sessiya (oddiy model)
+// 🔸 5. Sessiya
 let loggedUser = null;
 
 app.get("/logged-user", (req, res) => {
@@ -74,7 +74,7 @@ app.post("/logout", (req, res) => {
   res.sendStatus(200);
 });
 
-// 6. Foydalanuvchini yangilash
+// 🔸 6. Yangilash
 app.post("/update-user", (req, res) => {
   const updatedUser = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -89,7 +89,7 @@ app.post("/update-user", (req, res) => {
   }
 });
 
-// 🟢 Serverni ishga tushirish
+// 🟢 Serverni ishga tushurish
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
