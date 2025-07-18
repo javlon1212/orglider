@@ -1,3 +1,5 @@
+// server.js (YANGI, TO'G'RI QILINADIGAN KO'RINISH)
+
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
@@ -5,14 +7,16 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Middleware
+// Middlewares
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public"))); // Serve static files
+app.use(express.static(path.join(__dirname, "public"))); // Faqat public ichidagi fayllar ochiladi
 
-// === HTML Routes ===
+// Root sahifa - login.html
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
+
+// Qo‘shimcha sahifalar
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "register.html"));
 });
@@ -26,24 +30,21 @@ app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "admin.html"));
 });
 
-// === API Endpoints ===
+// ===== USERS =====
 const usersFile = path.join(__dirname, "users.json");
 
-// 1. Get all users
 app.get("/users", (req, res) => {
   if (!fs.existsSync(usersFile)) return res.json({ users: [] });
   const data = fs.readFileSync(usersFile);
   res.json(JSON.parse(data));
 });
 
-// 2. Save users
 app.post("/data", (req, res) => {
   const { users } = req.body;
   fs.writeFileSync(usersFile, JSON.stringify({ users }));
   res.json({ status: "ok" });
 });
 
-// 3. Delete user
 app.post("/delete-user", (req, res) => {
   const { login } = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -52,7 +53,6 @@ app.post("/delete-user", (req, res) => {
   res.sendStatus(200);
 });
 
-// 4. Block user
 app.post("/block-user", (req, res) => {
   const { login, blockedUntil } = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -66,7 +66,7 @@ app.post("/block-user", (req, res) => {
   }
 });
 
-// 5. Session logic
+// Sessiya (simple model)
 let loggedUser = null;
 
 app.get("/logged-user", (req, res) => {
@@ -86,7 +86,6 @@ app.post("/logout", (req, res) => {
   res.sendStatus(200);
 });
 
-// 6. Update user
 app.post("/update-user", (req, res) => {
   const updatedUser = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -101,7 +100,7 @@ app.post("/update-user", (req, res) => {
   }
 });
 
-// Start server
+// Server ishga tushirish
 app.listen(PORT, () => {
-  console.log(`\u2705 Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
