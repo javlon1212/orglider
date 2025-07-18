@@ -6,60 +6,56 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public"))); // faqat public papkadan fayl o'qiladi
 
-// === HTML sahifalar ===
+// Root sahifa — login.html
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "liderchat2", "login.html"));
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
+// Qo‘shimcha sahifalar
 app.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "liderchat2", "register.html"));
+  res.sendFile(path.join(__dirname, "public", "register.html"));
 });
-
 app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "liderchat2", "home.html"));
+  res.sendFile(path.join(__dirname, "public", "home.html"));
 });
-
 app.get("/app-chat", (req, res) => {
-  res.sendFile(path.join(__dirname, "liderchat2", "app-chat.html"));
+  res.sendFile(path.join(__dirname, "public", "app-chat.html"));
 });
-
 app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "liderchat2", "admin.html"));
+  res.sendFile(path.join(__dirname, "public", "admin.html"));
 });
 
-// === Foydalanuvchilar fayli ===
+// ===== USERS =====
 const usersFile = path.join(__dirname, "users.json");
 
-// 🔹 1. Barcha foydalanuvchilarni olish
+// 1. Barcha foydalanuvchilar
 app.get("/users", (req, res) => {
   if (!fs.existsSync(usersFile)) return res.json({ users: [] });
   const data = fs.readFileSync(usersFile);
   res.json(JSON.parse(data));
 });
 
-// 🔹 2. Foydalanuvchilarni saqlash (massiv ko‘rinishida)
+// 2. Foydalanuvchilarni saqlash
 app.post("/data", (req, res) => {
   const { users } = req.body;
   fs.writeFileSync(usersFile, JSON.stringify({ users }));
   res.json({ status: "ok" });
 });
 
-// 🔹 3. Foydalanuvchini o‘chirish
+// 3. Foydalanuvchini o‘chirish
 app.post("/delete-user", (req, res) => {
   const { login } = req.body;
-  if (!fs.existsSync(usersFile)) return res.sendStatus(404);
   const data = JSON.parse(fs.readFileSync(usersFile));
   const updated = data.users.filter(u => u.login !== login);
   fs.writeFileSync(usersFile, JSON.stringify({ users: updated }));
   res.sendStatus(200);
 });
 
-// 🔹 4. Foydalanuvchini bloklash
+// 4. Bloklash
 app.post("/block-user", (req, res) => {
   const { login, blockedUntil } = req.body;
-  if (!fs.existsSync(usersFile)) return res.sendStatus(404);
   const data = JSON.parse(fs.readFileSync(usersFile));
   const user = data.users.find(u => u.login === login);
   if (user) {
@@ -71,13 +67,8 @@ app.post("/block-user", (req, res) => {
   }
 });
 
-// 🔹 5. Sessiya (oddiy)
+// 5. Sessiya (simple)
 let loggedUser = null;
-
-app.post("/set-logged-user", (req, res) => {
-  loggedUser = req.body;
-  res.sendStatus(200);
-});
 
 app.get("/logged-user", (req, res) => {
   if (!loggedUser) return res.json({ user: null });
@@ -86,12 +77,17 @@ app.get("/logged-user", (req, res) => {
   res.json({ user, all: data.users });
 });
 
+app.post("/set-logged-user", (req, res) => {
+  loggedUser = req.body;
+  res.sendStatus(200);
+});
+
 app.post("/logout", (req, res) => {
   loggedUser = null;
   res.sendStatus(200);
 });
 
-// 🔹 6. Foydalanuvchini yangilash
+// 6. Yangilash
 app.post("/update-user", (req, res) => {
   const updatedUser = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -106,7 +102,7 @@ app.post("/update-user", (req, res) => {
   }
 });
 
-// === Serverni ishga tushurish ===
+// Start
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
