@@ -7,37 +7,46 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(express.static("public"));
+
+// === HTML sahifalar ===
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "liderchat2", "login.html"));
 });
-app.get("/", (req, res) => {
+
+app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "liderchat2", "register.html"));
 });
-app.get("/login", (req, res) => {
+
+app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "liderchat2", "home.html"));
-});app.get("/login", (req, res) => {
+});
+
+app.get("/app-chat", (req, res) => {
   res.sendFile(path.join(__dirname, "liderchat2", "app-chat.html"));
-});app.get("/login", (req, res) => {
+});
+
+app.get("/admin", (req, res) => {
   res.sendFile(path.join(__dirname, "liderchat2", "admin.html"));
 });
+
 // === Foydalanuvchilar fayli ===
 const usersFile = path.join(__dirname, "users.json");
 
-// 🔸 1. Barcha foydalanuvchilarni olish
+// 🔹 1. Barcha foydalanuvchilarni olish
 app.get("/users", (req, res) => {
   if (!fs.existsSync(usersFile)) return res.json({ users: [] });
   const data = fs.readFileSync(usersFile);
   res.json(JSON.parse(data));
 });
 
-// 🔸 2. Foydalanuvchilarni saqlash
+// 🔹 2. Foydalanuvchilarni saqlash (massiv ko‘rinishida)
 app.post("/data", (req, res) => {
   const { users } = req.body;
   fs.writeFileSync(usersFile, JSON.stringify({ users }));
   res.json({ status: "ok" });
 });
 
-// 🔸 3. Foydalanuvchini o‘chirish
+// 🔹 3. Foydalanuvchini o‘chirish
 app.post("/delete-user", (req, res) => {
   const { login } = req.body;
   if (!fs.existsSync(usersFile)) return res.sendStatus(404);
@@ -47,7 +56,7 @@ app.post("/delete-user", (req, res) => {
   res.sendStatus(200);
 });
 
-// 🔸 4. Foydalanuvchini bloklash
+// 🔹 4. Foydalanuvchini bloklash
 app.post("/block-user", (req, res) => {
   const { login, blockedUntil } = req.body;
   if (!fs.existsSync(usersFile)) return res.sendStatus(404);
@@ -62,8 +71,13 @@ app.post("/block-user", (req, res) => {
   }
 });
 
-// 🔸 5. Sessiya (oddiy holatda)
+// 🔹 5. Sessiya (oddiy)
 let loggedUser = null;
+
+app.post("/set-logged-user", (req, res) => {
+  loggedUser = req.body;
+  res.sendStatus(200);
+});
 
 app.get("/logged-user", (req, res) => {
   if (!loggedUser) return res.json({ user: null });
@@ -72,17 +86,12 @@ app.get("/logged-user", (req, res) => {
   res.json({ user, all: data.users });
 });
 
-app.post("/set-logged-user", (req, res) => {
-  loggedUser = req.body;
-  res.sendStatus(200);
-});
-
 app.post("/logout", (req, res) => {
   loggedUser = null;
   res.sendStatus(200);
 });
 
-// 🔸 6. Foydalanuvchini yangilash
+// 🔹 6. Foydalanuvchini yangilash
 app.post("/update-user", (req, res) => {
   const updatedUser = req.body;
   const data = JSON.parse(fs.readFileSync(usersFile));
@@ -97,7 +106,7 @@ app.post("/update-user", (req, res) => {
   }
 });
 
-// 🔚 Server ishga tushishi
+// === Serverni ishga tushurish ===
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
