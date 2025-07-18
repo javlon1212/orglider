@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <title>Login</title>
 </head>
 <body>
-    qale
-<script src="../server.js"></script>
+  <h2>Serverga ma'lumot yuborish</h2>
+  <input type="text" id="textInput" placeholder="Matn yozing" />
+  <button id="saveBtn">Save</button>
+  <p id="p"></p>
+
+  <script>
+    // Ma'lumotni olish va chiqarish
+    async function getText() {
+      const res = await fetch("/data");
+      const data = await res.json();
+      document.getElementById("p").textContent = data.text || "";
+    }
+
+    document.getElementById("saveBtn").addEventListener("click", async () => {
+      const value = document.getElementById("textInput").value;
+
+      await fetch("/data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text: value })
+      });
+
+      getText(); // p ga chiqarish
+    });
+
+    // Refreshda p da ko‘rsatish
+    window.addEventListener("DOMContentLoaded", getText);
+  </script>
 </body>
 </html>

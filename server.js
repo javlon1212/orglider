@@ -17,6 +17,5 @@ app.get("/", (req, res) => {
 });
 
 // Serverni ishga tushirish
-app.listen(port, () => {
-  console.log(`✅ Server started on http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
