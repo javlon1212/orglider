@@ -13,7 +13,7 @@ app.get("/login", (req, res) => {
 
 // Root sahifa
 app.get("/", (req, res) => {
-  res.send("Subscribe to Arpan Neupane's channel");
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
 // Serverni ishga tushirish
