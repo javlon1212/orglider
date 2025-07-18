@@ -11,7 +11,7 @@ app.use(express.json());
 
 // 🌐 Asosiy sahifa — login.html
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "login.html"));
+  res.sendFile(path.join(__dirname, "liderchat2", "login.html"));
 });
 
 // 📦 USERS MA'LUMOTLARI
