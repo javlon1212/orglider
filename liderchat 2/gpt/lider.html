@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LIDER GPT PAGE</title>
+  <link rel="stylesheet" href="./lider.css"/>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="header-chap">
+      <img src="./logo.png" alt="">
+      <p>LIDER GPT</p>
+    </div>
+    <div class="header-ong">
+      <a style="color: white; text-decoration: none;" href="../app-chat.html">Back</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <p id="gptJavob"></p>
+    <div id="oziJavov"></div>
+  </section>
+</main>
+
+<footer>
+  <input id="xabar" type="text" />
+  <button id="send">SEND</button>
+</footer>
+
+
+<script>
+
+const input = document.getElementById("xabar");
+const sendBtn = document.getElementById("send");
+const oziJavov = document.getElementById("oziJavov");
+
+input.addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    sendBtn.click();
+  }
+});
+
+sendBtn.addEventListener("click", function () {
+  const msg = input.value.trim().toLowerCase();
+
+  if (msg !== "") {
+    const userP = document.createElement("p");
+    userP.className = "ozi-msg";
+    userP.textContent = msg;
+    oziJavov.appendChild(userP);
+  }
+
+  if (msg.includes("salom")) {
+    addGPT("Salom, yaxshimisiz!");
+  } else if (msg.includes("tekin premium")) {
+    addGPT("Bizning saytimizda tekin premium olsa bo‘ladi!\n\n1) Bizning saytimizni Instagram’da reklama qilsangiz va admin ko‘rsa, sizga premium beriladi. Reklama qilingan videoni adminga yuborasiz.\n\n2) Saytimizda tekin premium olish uchun bizda bot yaratasiz. Faqat bu imkoniyat 1 oydan keyin faollashadi.");
+  } else if (msg.includes("raxmat")) {
+    addGPT("Raxmat, siz bizning saytimizni yaxshi profilisiz.");
+  } else if (
+    msg.includes("reklama") ||
+    msg.includes("karochi") ||
+    msg.includes("aknt") ||
+    msg.includes("akkaunt") ||
+    msg.includes("hisob") ||
+    msg.includes("akaunt")
+  ) {
+    addGPT("Sizning akuntingizni reklama qilish uchun adminga bog‘lanasiz.\n\nAdminga yozishda faqat 'salom' va '55221-aa db' deb yozsangiz, tekinga reklama qilib beradi.");
+  } else if (msg.includes("saytni logosini tashla")) {
+    showLogoWithDownload();
+  } else if (
+    msg.includes("botni qayerdan") ||
+    msg.includes("bot qattan") ||
+    msg.includes("bot yarat") ||
+    msg.includes("bot yasash") ||
+    msg.includes("bot qilish") ||
+    msg.includes("qayerdan bot") ||
+    msg.includes("qanaqa qilib bot")
+  ) {
+    addGPT("Bizning saytga bot yaratish uchun:\n\n1) O'zingiz VS Code’da kod yozasiz. Yaratganingizdan keyin saytga kirib 'Bot Create' tugmasini bossangiz fayl yuklash ochiladi. Shunda yaratgan zip faylingizni tashlaysiz — bo‘ldi!\n\n2) Oddiy bot yaratish uchun Telegram’da 'BotFather' deb qidirib, o‘sha yerda bot ochasiz va ID olasiz.\n\n⚠️ Men sizga bot yaratib bera olmayman. Bot yaratish funksiyamiz 1 oydan keyin faollashishi mumkin.");
+  } else if (
+    msg.includes("sannn") ||
+    msg.includes("san") ||
+    msg.includes("yok") ||
+    msg.includes("yoq") ||
+    msg.includes("hechnima")
+  ) {
+    addGPT("Men sizga bot yaratib bera olmayman. Bu funksiya 1 oydan keyin ishga tushishi mumkin.");
+  } else if (
+    msg.includes("topib ber") ||
+    msg.includes("malumotini top") ||
+    msg.includes("loginini yozib")
+  ) {
+    const allUsers = JSON.parse(localStorage.getItem("users") || "[]");
+    const words = msg.split(" ");
+    const possibleLogin = words.find(w => allUsers.some(u => u.login.toLowerCase() === w));
+
+    if (!possibleLogin) {
+      addGPT("Login topilmadi. Iltimos, to‘g‘ri login kiriting.");
+    } else {
+      const found = allUsers.find(u => u.login.toLowerCase() === possibleLogin);
+      addGPT(
+        `Sizga topib berdik:\n\n🧾 Login: ${found.login}\n📅 Tug‘ilgan sana: ${found.day}.${found.month}.${found.year}\n🚻 Jinsi: ${found.gender === "boy" ? "O‘g‘il bola" : "Qiz bola"}\n\n⚠️ Akkaunt paroli yoki Gmail manzilini bera olmaymiz. Bu bizning maxfiylik qoidalarimizga zid.`
+      );
+    }
+  }
+
+  input.value = ""; 
+});
+
+function addGPT(text) {
+  const gptP = document.createElement("p");
+  gptP.className = "ozi-msg";
+  gptP.style.borderLeft = "4px solid #3fb950";
+  gptP.textContent = text;
+  oziJavov.appendChild(gptP);
+}
+
+function showLogoWithDownload() {
+  const container = document.createElement("div");
+  container.style.marginTop = "10px";
+
+  const img = document.createElement("img");
+  img.src = "./logo.png";
+  img.style.width = "100px";
+  img.style.height = "100px";
+  img.style.display = "block";
+  img.style.marginBottom = "5px";
+
+  const downloadBtn = document.createElement("button");
+  downloadBtn.textContent = "Download";
+  downloadBtn.style.padding = "6px 12px";
+  downloadBtn.style.cursor = "pointer";
+  downloadBtn.style.backgroundColor = "#3fb950";
+  downloadBtn.style.border = "none";
+  downloadBtn.style.color = "white";
+  downloadBtn.style.borderRadius = "4px";
+
+  downloadBtn.addEventListener("click", function () {
+    const link = document.createElement("a");
+    link.href = "./logo.png";
+    link.download = "logo.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  container.appendChild(img);
+  container.appendChild(downloadBtn);
+  oziJavov.appendChild(container);
+}
+
+</script>
+</body>
+</html>

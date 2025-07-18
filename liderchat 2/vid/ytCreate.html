@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create video</title>
+    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/021/495/950/non_2x/youtube-logo-icon-with-light-effect-free-png.png">
+    <link rel="stylesheet" href="./style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    
+<div class="ota">
+
+<h2>Create Videos</h2>
+
+<input placeholder="Video Name" type="text">
+<input placeholder="Video opisaniya" type="text">
+
+<button>KIds</button>
+<button>No Kids</button>
+
+<button><i class="fas fa-image"></i> Vidoe img</button>
+<button><i class="fas fa-file-video"></i> Video</button>
+
+<button>Create <span id="load" ><img src="./loader.gif" alt=""></span><span id="good" ><img src="./Success (1).gif" alt=""></span></button>
+
+</div>
+
+
+
+<script>
+  const createBtn = document.querySelector("button:last-of-type");
+  const load = document.getElementById("load");
+  const good = document.getElementById("good");
+
+  createBtn.addEventListener("click", () => {
+    load.style.display = "inline-block";
+    good.style.display = "none";
+
+    setTimeout(() => {
+      load.style.display = "none";
+      good.style.display = "inline-block";
+    }, 2000); // 2 soniya loading
+  });
+</script>
+</body>
+</html>

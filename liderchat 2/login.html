@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN PAGE</title>
+    <link rel="stylesheet" href="./csslar/style.css">
+    <link rel="icon" type="image/png" href="./ipmage/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div class="ota">
+  <div class="chap">
+    <h2 class="h2-login">LOGIN</h2>
+    <input id="login-login" class="input-login" required type="text" placeholder="LOGIN">
+    <input id="login-password" class="input-password" required type="password" placeholder="PASSWORD">
+
+    <i onclick="togglePassword(true)" id="ochiq" class="fa-solid fa-eye"></i>
+    <i onclick="togglePassword(false)" style="display: none;" id="yopiq" class="fa-solid fa-eye-slash"></i>
+
+    <button class="buttonlar2" onclick="kirish()">KIRISH</button>
+    <a href="./parol.html"><button class="buttonlar2">ADMIN LOGIN</button></a>
+
+    <p id="ato" style="color: red; display: none;">Login yoki parol noto‘g‘ri!</p>
+    <p class="ae">Don't have an account? <a href="./register.html">Sign Up</a></p>
+  </div>
+
+  <div class="ong">
+    <img class="rasm-logo" src="./csslar/logo.png" alt="">
+    <p class="lider-chat">LIDER CHAT</p>
+  </div>
+</div>
+<script src="./jslar/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.ota {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    width: 320px;
+    text-align: center;
+}
+
+.ota h2 {
+    margin: 20px 0 10px;
+    font-size: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+.ota img {
+    width: 300px;
+    height: 180px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.ota p {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    color: #eee;
+}
+
+.ota button {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-size: 16px;
+    background-color: #ffffff22;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ota button:hover {
+    background-color: #ffffff44;
+}
+
+.ota input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.ota p:nth-of-type(2) {
+    color: #ff6b6b;
+    font-weight: bold;
+    margin: 8px 0;
+}

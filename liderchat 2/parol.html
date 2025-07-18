@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADMIN LOGIN</title>
+  <link rel="icon" type="image/png" href="./ipmage/logo.png">
+  <style> 
+*{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #0f0f0f;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background-color: #181818;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 208, 255, 0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #00d0ff;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 15px;
+  background-color: #2a2a2a;
+  color: white;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #00d0ff;
+  color: black;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #00a8cc;
+}
+
+.error {
+  margin-top: 10px;
+  color: crimson;
+  display: none;
+}
+  </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div class="container">
+  <h2>ADMIN LOGIN</h2>
+  <input type="password" id="adminPass" placeholder="Enter admin password">
+  <button onclick="checkPassword()">LOGIN</button>
+  <p class="error" id="errorMsg">❌ Noto‘g‘ri parol!</p>
+</div>
+
+
+
+
+
+
+
+
+<script>
+  function checkPassword() {
+    const pass = document.getElementById("adminPass").value.trim();
+    const error = document.getElementById("errorMsg");
+
+    if (pass === "lidercha") {
+      window.location.href = "admin.html";
+    } else {
+      error.style.display = "block";
+    }
+  }
+</script>
+</body>
+</html>

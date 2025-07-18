@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Page</title>
+    <link rel="stylesheet" href="./credit.css">
+    <link rel="icon" type="image/png" href="./ipmage/logo.png">
+</head>
+<body>
+
+<div class="ota">
+
+<h2>Credit Card</h2>
+
+<img src="./oldi.png" alt="">
+
+<p>00 00 00 00 00</p>
+
+<button>New Card</button>
+
+<h2>Pay</h2>
+
+<button>Premium</button>
+<button>Sticker</button>
+
+<h2>Promo</h2>
+<input id="promo" type="text">
+<p id="xato" >Promo Code Invalit!</p>
+<button id="active" >Active Promo</button>
+
+</div>
+    
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const promoInput = document.getElementById("promo");
+  const xatoText = document.getElementById("xato");
+  const activeBtn = document.getElementById("active");
+
+  const user = JSON.parse(localStorage.getItem("loggedUser") || "{}");
+  const promoUsedKey = `promoUsed_${user.login}`;
+
+  activeBtn.addEventListener("click", () => {
+    const promoCode = promoInput.value.trim();
+    if (promoCode === "astik22") {
+      if (localStorage.getItem(promoUsedKey)) {
+        xatoText.textContent = "Promo kod allaqachon ishlatilgan!";
+        xatoText.style.display = "block";
+      } else {
+        const endTime = Date.now() + 24 * 60 * 60 * 1000;
+        localStorage.setItem("premiumUntil", endTime);
+        localStorage.setItem(promoUsedKey, "true");
+        xatoText.textContent = "Promo kod faollashtirildi!";
+        xatoText.style.color = "green";
+        xatoText.style.display = "block";
+      }
+    } else {
+      xatoText.textContent = "Promo Code Invalit!";
+      xatoText.style.color = "red";
+      xatoText.style.display = "block";
+    }
+  });
+});
+
+</script>
+</body>
+</html>

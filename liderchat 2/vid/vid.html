@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Video Sahifasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+        }
+        .video-player {
+            width: 100%;
+            height: 500px;
+            background-color: black;
+            position: relative;
+        }
+        .video-player iframe {
+            width: 100%;
+            height: 100%;
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        .channel {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .channel img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+        .channel-name {
+            font-weight: bold;
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .button {
+            background-color: #f1f1f1;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .stats {
+            margin-top: 10px;
+            color: #606060;
+            font-size: 14px;
+        }
+    </style>
+    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/021/495/950/non_2x/youtube-logo-icon-with-light-effect-free-png.png">
+</head>
+<body>
+
+<div class="container">
+    <!-- Video player -->
+    <div class="video-player">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/IL4ayMa1p-U?si=92Ke3b3kQ64HHPqQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <!-- Title -->
+    <div class="title">Telegramda o'z sun’iy intellektingizni yaratishni o‘rganasiz</div>
+
+    <!-- Channel info -->
+    <div class="channel">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoba1RPe-dSwqIDw4O5Wskz03p8vJNVn2LZA&s" alt="Ustoz AI">
+        <div>
+            <div class="channel-name">Ustoz AI</div>
+            <div style="font-size: 12px; color: #777;">86K obunachi</div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <div class="button">👍 <span id="like" >0</span></div>
+        <div class="button">🔗 Share</div>
+        <div class="button">🗨️ Comment</div>
+        <div class="button">⋯</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats"><span id="viev" >0</span> views · <span id="kuni" >0</span> kun oldin</div>
+</div>
+
+</body>
+</html>

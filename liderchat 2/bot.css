@@ -1,0 +1,438 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #000b18;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.ota {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+.bshi{
+  width: 60px;
+  background-color: #001a36;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+  gap: 30px;
+  color: white;
+  font-size: 22px;
+  border-right: 1px solid #3d3d3d;
+  transition: opacity 0.3s ease;
+}
+
+.chap32.active {
+  left: 0;
+}
+
+#menu{
+  width: 50px;
+  background-color: #001a36;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  color: white;
+  font-size: 28px;
+}
+#menu:hover{
+  color: #1da1f2;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.2s;  
+}
+
+.bshi i:hover{
+  color: #1da1f2;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.chap {
+  width: 25%;
+  background-color: #001227;
+  border-right: 1px solid gray;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.tepa {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+#input {
+  flex: 1;
+  height: 38px;
+  border-radius: 20px;
+  padding-left: 12px;
+  font-size: 16px;
+  border: none;
+}
+
+#story {
+  font-size: 22px;
+  color: white;
+  background-color: #1da1f2;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.past {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+.bshi.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.past button {
+  background-color: transparent;
+  border: none;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-radius: 12px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.past button:hover {
+  background-color: #002349;
+}
+
+.but-chap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logosi {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #1da1f2;
+}
+
+.nomi {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.stikeri {
+  width: 20px;
+}
+
+.x-soni {
+  font-size: 14px;
+  background-color: #1da1f2;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.x-soni2 {
+  display: none;
+}
+
+.chap2 {
+  width: 25%;
+  background-color: #000f1e;
+  border-right: 1px solid gray;
+  padding: 20px;
+  color: white;
+}
+
+.ong {
+  width: 80%;
+  background-color: #00182f;
+  color: white;
+}
+
+.chap::-webkit-scrollbar {
+  width: 5px;
+}
+.chap::-webkit-scrollbar-thumb {
+  background: #1da1f2;
+  border-radius: 10px;
+}
+.stikeri2{
+  width: 50px;
+}
+
+
+
+
+
+.chap32 {
+  width: 270px;
+  height: 100vh;
+  background-color: #f8f9fa;
+  border-right: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: -400px;
+  transition: left 0.4s ease-in-out;
+  z-index: 100;
+}
+
+.chap32.active {
+  left: 0;
+}
+
+.chap32 img {
+  width: 60px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+.ch32-tepa {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+#user-info {
+  font-size: 18px;
+  font-weight: 600;
+  color: #212529;
+}
+
+.stik {
+  font-size: 14px;
+  color: #1da1f2;
+  text-decoration: none;
+}
+
+.stik:hover {
+  text-decoration: underline;
+}
+
+.biurga {
+  display: flex;
+  flex-direction: column;
+}
+
+.my {
+  border-bottom: 1px solid #ccc;
+}
+
+.my-button {
+  width: 100%;
+  height: 45px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  text-align: left;
+  padding-left: 15px;
+  color: #212529;
+}
+
+.my-button:hover {
+  background-color: #dee2e6;
+}
+
+.set button {
+  font-weight: 400;
+  font-size: 16px;
+}
+.set i {
+  color: #6c757d;
+}
+
+.pastchasi {
+  margin-top: auto;
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #6c757d;
+}
+.pastchasi a {
+  color: #1da1f2;
+  text-decoration: none;
+}
+.pastchasi a:hover {
+  text-decoration: underline;
+}
+
+.chap::-webkit-scrollbar {
+  width: 6px;
+}
+.chap::-webkit-scrollbar-thumb {
+  background: #1da1f2;
+  border-radius: 10px;
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  z-index: 99;
+}
+
+
+.qoshish{
+  background-color: orange;
+  position: fixed;
+  top: 450px;
+  left: 150px;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  display: none;
+  width: 300px;
+  gap: 10px;
+}
+.qoshish input{
+  width: 100%;
+  height: 40px;
+  padding-left: 5px;
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.qoshish button{
+  padding: 1px 40px;
+  font-weight: 600;
+  font-size: 20px;
+  background-color: blue;
+  color: white;
+  border-radius: 20px;
+  border: none;
+}
+#userNo{
+  color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+.n1 {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.header .n2{
+  width: 22px;
+}
+.header{
+  background-color: blue;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.main{
+  height: 84.2vh;
+}
+.footer input{
+  width: 100%;
+  height: 50px;
+  background-color: blue;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  border: 2px solid white;
+  border-radius: 3px;
+  padding-left: 10px;
+}
+
+.message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 50%;
+  font-family: sans-serif;
+}
+
+.right {
+  background-color: white;
+  align-self: flex-end;
+  margin-left: auto;
+  text-align: right;
+  color: black;
+}
+
+.left {
+  background-color: white;
+  align-self: flex-start;
+  margin-right: auto;
+  text-align: left;
+  display: inline-block;
+  color: black;
+}
+.boty{
+  display: none;
+}
+.boty2{
+  display: none;
+}
+
+.copy-btn {
+  margin-top: 5px;
+  padding: 5px 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background: #0056b3;
+}
+a{
+  color: white;
+}
