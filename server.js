@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // 📁 Statik fayllarni o‘qish (public papkasi ichidan)
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "liderchat2")));
 app.use(express.json());
 
 // 🌐 Asosiy sahifa — login.html
