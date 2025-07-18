@@ -19,3 +19,28 @@ app.get("/", (req, res) => {
 // Serverni ishga tushirish
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+//p
+
+
+const fs = require("fs");
+
+// Ma'lumot olish
+app.get("/data", (req, res) => {
+  const filePath = path.join(__dirname, "data.json");
+  if (!fs.existsSync(filePath)) {
+    return res.json({ text: "" });
+  }
+  const json = fs.readFileSync(filePath);
+  res.json(JSON.parse(json));
+});
+
+// Ma'lumot yozish
+app.use(express.json());
+app.post("/data", (req, res) => {
+  const filePath = path.join(__dirname, "data.json");
+  const { text } = req.body;
+  fs.writeFileSync(filePath, JSON.stringify({ text }));
+  res.json({ status: "ok" });
+});

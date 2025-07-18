@@ -2,85 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    label, input, button {
-      font-size: 16px;
-      display: block;
-      margin-top: 10px;
-    }
-    p {
-      margin-top: 20px;
-      font-size: 18px;
-    }
-  </style>
+  <title>Document</title>
 </head>
 <body>
-  <h2>Serverga ma'lumot yuborish</h2>
+  <p id="yozgani"></p>
 
-  <label for="textInput">Matn kiriting:</label>
-  <input type="text" id="textInput" name="textInput" placeholder="Matn yozing" />
-  
-  <button id="saveBtn" type="button">Saqlash</button>
-
-  <p id="userCount">Yuklanmoqda...</p>
-  <p>Kiritilgan matn: <span id="outputText">-</span></p>
+  <input id="xabari" type="text" placeholder="Xabar yozing" />
+  <button id="sae">Save</button>
 
   <script>
-    // Unikal ID yaratish va saqlash
-    let myID = localStorage.getItem("user_id");
-    if (!myID) {
-      myID = "user_" + Math.random().toString(36).substring(2, 12);
-      localStorage.setItem("user_id", myID);
-    }
+    // DOM tayyor bo‘lsa — ma'lumotni olib ko‘rsatamiz
+    document.addEventListener("DOMContentLoaded", getText);
 
-    // Foydalanuvchini faqat bir marta yuborish
-    async function sendUserID() {
-      const alreadySent = localStorage.getItem("already_sent");
-      if (!alreadySent) {
-        try {
-          await fetch("/data", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ id: myID })
-          });
-          localStorage.setItem("already_sent", "true");
-        } catch (error) {
-          console.error("Foydalanuvchini yuborishda xatolik:", error);
-        }
-      }
-      getUserCount();
-    }
+    // Save tugmasi bosilganda ma'lumotni serverga yuboramiz
+    document.getElementById("sae").addEventListener("click", async () => {
+      const value = document.getElementById("xabari").value.trim();
 
-    // Kirganlar sonini olish
-    async function getUserCount() {
-      try {
-        const response = await fetch("/data");
-        const data = await response.json();
-        const text = `Kirgani: ${data.count} foydalanuvchi`;
-        document.getElementById("userCount").textContent = text;
-      } catch (error) {
-        document.getElementById("userCount").textContent =
-          "Xatolik: foydalanuvchilar soni olinmadi.";
-      }
-    }
+      // Serverga POST yuborish
+      await fetch("/data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text: value })
+      });
 
-    // Matn chiqarish
-    document.getElementById("saveBtn").addEventListener("click", () => {
-      const value = document.getElementById("textInput").value.trim();
-      document.getElementById("outputText").textContent = value || "-";
+      getText(); // Yuborgandan keyin qaytadan ko‘rsatish
     });
 
-    // DOM tayyor bo‘lsa — ishga tushadi
-    window.addEventListener("DOMContentLoaded", sendUserID);
+    // Serverdan ma'lumotni olib, p ga chiqarish
+    async function getText() {
+      try {
+        const res = await fetch("/data");
+        const data = await res.json();
+        document.getElementById("yozgani").textContent = data.text || "";
+      } catch (err) {
+        document.getElementById("yozgani").textContent = "Xatolik!";
+      }
+    }
   </script>
 </body>
 </html>
