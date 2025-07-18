@@ -14,20 +14,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-// 📄 Qo‘shimcha sahifalar (agar kerak bo‘lsa)
-app.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "register.html"));
-});
-app.get("/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "home.html"));
-});
-app.get("/app-chat", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "app-chat.html"));
-});
-app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "admin.html"));
-});
-
 // 📦 USERS MA'LUMOTLARI
 const usersFile = path.join(__dirname, "users.json");
 
